@@ -18,6 +18,15 @@ function initializeLoadingScreen() {
     
     if (!loadingScreen || !progressFill) return;
     
+    // Check if device is mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // Skip loading animation on mobile devices
+        loadingScreen.remove();
+        return;
+    }
+    
     // Simulate loading progress
     let progress = 0;
     const progressInterval = setInterval(() => {
