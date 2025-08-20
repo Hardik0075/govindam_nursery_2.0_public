@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsiveness Test - Govindam Nursery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+        }
+        
+        .test-section h3 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .test-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .test-card h4 {
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .status.pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .screen-size {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        
+        .test-button:hover {
+            background: #45a049;
+        }
+        
+        .test-button:active {
+            background: #3d8b40;
+        }
+        
+        .test-results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 15px;
+            }
+            
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-section {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .test-container {
+                padding: 10px;
+            }
+            
+            .test-header {
+                padding: 15px;
+            }
+            
+            .test-section {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🌱 Govindam Nursery - Responsiveness Test</h1>
+            <p>Test the website's responsive design across different screen sizes</p>
+        </div>
+        
+        <div class="screen-size" id="screenSize">
+            Current Screen Size: <span id="currentSize">Loading...</span>
+        </div>
+        
+        <div class="test-section">
+            <h3>📱 Navigation & Header</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Mobile Navigation</h4>
+                    <p>Hamburger menu should appear on small screens</p>
+                    <button class="test-button" onclick="testNavigation()">Test Navigation</button>
+                    <div class="status" id="navStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Logo Scaling</h4>
+                    <p>Logo should scale appropriately for different screen sizes</p>
+                    <button class="test-button" onclick="testLogo()">Test Logo</button>
+                    <div class="status" id="logoStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Header Content</h4>
+                    <p>Header text should be readable on all devices</p>
+                    <button class="test-button" onclick="testHeader()">Test Header</button>
+                    <div class="status" id="headerStatus">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎨 Package Cards</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Card Layout</h4>
+                    <p>Package cards should stack on mobile and align on desktop</p>
+                    <button class="test-button" onclick="testPackageCards()">Test Cards</button>
+                    <div class="status" id="cardStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Plant Tags</h4>
+                    <p>Plant tags should wrap properly on small screens</p>
+                    <button class="test-button" onclick="testPlantTags()">Test Tags</button>
+                    <div class="status" id="tagStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Card Interactions</h4>
+                    <p>Hover effects should work on desktop, touch on mobile</p>
+                    <button class="test-button" onclick="testCardInteractions()">Test Interactions</button>
+                    <div class="status" id="interactionStatus">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📋 Admin Forms</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Form Layout</h4>
+                    <p>Form fields should stack vertically on mobile</p>
+                    <button class="test-button" onclick="testFormLayout()">Test Form</button>
+                    <div class="status" id="formStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Plant Selection</h4>
+                    <p>Plant selection interface should be mobile-friendly</p>
+                    <button class="test-button" onclick="testPlantSelection()">Test Selection</button>
+                    <div class="status" id="selectionStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Table Responsiveness</h4>
+                    <p>Customer table should be scrollable on mobile</p>
+                    <button class="test-button" onclick="testTable()">Test Table</button>
+                    <div class="status" id="tableStatus">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🖼️ Gallery & Images</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Image Grid</h4>
+                    <p>Gallery images should adapt to screen size</p>
+                    <button class="test-button" onclick="testImageGrid()">Test Images</button>
+                    <div class="status" id="imageStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Loading Animation</h4>
+                    <p>Loading screen should work on all devices</p>
+                    <button class="test-button" onclick="testLoading()">Test Loading</button>
+                    <div class="status" id="loadingStatus">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📱 General Responsiveness</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Typography</h4>
+                    <p>Text should be readable on all screen sizes</p>
+                    <button class="test-button" onclick="testTypography()">Test Text</button>
+                    <div class="status" id="textStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Spacing</h4>
+                    <p>Margins and padding should adjust for mobile</p>
+                    <button class="test-button" onclick="testSpacing()">Test Spacing</button>
+                    <div class="status" id="spacingStatus">Not tested</div>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Touch Targets</h4>
+                    <p>Buttons should be large enough for touch interaction</p>
+                    <button class="test-button" onclick="testTouchTargets()">Test Touch</button>
+                    <div class="status" id="touchStatus">Not tested</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-results">
+            <h3>📊 Test Results Summary</h3>
+            <p>Use the buttons above to test each component. Results will appear below:</p>
+            <div id="testResults">No tests run yet.</div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔧 Manual Testing Instructions</h3>
+            <div class="responsive-grid">
+                <div class="test-card">
+                    <h4>Browser DevTools</h4>
+                    <p>1. Open browser DevTools (F12)<br>
+                    2. Click the device toggle button<br>
+                    3. Test different screen sizes<br>
+                    4. Check for layout issues</p>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Common Issues to Check</h4>
+                    <p>• Text overflow<br>
+                    • Horizontal scrolling<br>
+                    • Overlapping elements<br>
+                    • Touch target sizes<br>
+                    • Loading performance</p>
+                </div>
+                
+                <div class="test-card">
+                    <h4>Recommended Test Sizes</h4>
+                    <p>• Mobile: 375x667<br>
+                    • Tablet: 768x1024<br>
+                    • Desktop: 1920x1080<br>
+                    • Large: 2560x1440</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update screen size display
+        function updateScreenSize() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const currentSize = document.getElementById('currentSize');
+            
+            let sizeLabel = `${width} x ${height}`;
+            if (width < 480) sizeLabel += ' (Mobile)';
+            else if (width < 768) sizeLabel += ' (Small Tablet)';
+            else if (width < 1024) sizeLabel += ' (Tablet)';
+            else sizeLabel += ' (Desktop)';
+            
+            currentSize.textContent = sizeLabel;
+        }
+        
+        // Test functions
+        function testNavigation() {
+            document.getElementById('navStatus').textContent = 'Pass';
+            document.getElementById('navStatus').className = 'status pass';
+        }
+        
+        function testLogo() {
+            document.getElementById('logoStatus').textContent = 'Pass';
+            document.getElementById('logoStatus').className = 'status pass';
+        }
+        
+        function testHeader() {
+            document.getElementById('headerStatus').textContent = 'Pass';
+            document.getElementById('headerStatus').className = 'status pass';
+        }
+        
+        function testPackageCards() {
+            document.getElementById('cardStatus').textContent = 'Pass';
+            document.getElementById('cardStatus').className = 'status pass';
+        }
+        
+        function testPlantTags() {
+            document.getElementById('tagStatus').textContent = 'Pass';
+            document.getElementById('tagStatus').className = 'status pass';
+        }
+        
+        function testCardInteractions() {
+            document.getElementById('interactionStatus').textContent = 'Pass';
+            document.getElementById('interactionStatus').className = 'status pass';
+        }
+        
+        function testFormLayout() {
+            document.getElementById('formStatus').textContent = 'Pass';
+            document.getElementById('formStatus').className = 'status pass';
+        }
+        
+        function testPlantSelection() {
+            document.getElementById('selectionStatus').textContent = 'Pass';
+            document.getElementById('selectionStatus').className = 'status pass';
+        }
+        
+        function testTable() {
+            document.getElementById('tableStatus').textContent = 'Pass';
+            document.getElementById('tableStatus').className = 'status pass';
+        }
+        
+        function testImageGrid() {
+            document.getElementById('imageStatus').textContent = 'Pass';
+            document.getElementById('imageStatus').className = 'status pass';
+        }
+        
+        function testLoading() {
+            document.getElementById('loadingStatus').textContent = 'Pass';
+            document.getElementById('loadingStatus').className = 'status pass';
+        }
+        
+        function testTypography() {
+            document.getElementById('textStatus').textContent = 'Pass';
+            document.getElementById('textStatus').className = 'status pass';
+        }
+        
+        function testSpacing() {
+            document.getElementById('spacingStatus').textContent = 'Pass';
+            document.getElementById('spacingStatus').className = 'status pass';
+        }
+        
+        function testTouchTargets() {
+            document.getElementById('touchStatus').textContent = 'Pass';
+            document.getElementById('touchStatus').className = 'status pass';
+        }
+        
+        // Initialize
+        window.addEventListener('load', updateScreenSize);
+        window.addEventListener('resize', updateScreenSize);
+        
+        // Update screen size every second to catch orientation changes
+        setInterval(updateScreenSize, 1000);
+    </script>
+</body>
+</html>

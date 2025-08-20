@@ -1,0 +1,206 @@
+GOVINDAM NURSERY WEBSITE - COMPLETE DETAILS
+============================================
+
+WEBSITE STRUCTURE
+-----------------
+1. Homepage (index.html) - Hero section, about, gallery preview
+2. Gallery (gallery.html) - Plant collection showcase
+3. Packages (packages.html) - Plant combo deals and bulk orders
+4. Carbon Offset (carbon.html) - CO2 calculator and certificates
+5. Contact (contact.html) - Contact form and location
+
+PAGES & FEATURES
+----------------
+
+HOME PAGE (index.html)
+- Hero section with "Bringing Green to Life" tagline
+- About section with mission and features
+- Gallery preview with 4 categories
+- Footer with contact info and social links
+
+GALLERY PAGE (gallery.html)
+- 6 plant category cards with hover effects
+- Sidebar with nursery info and statistics
+- Download brochure functionality
+- Call-to-action section
+
+PACKAGES PAGE (packages.html)
+- 11 plant combo packages including:
+  * Fruit Lovers Combo (₹3,499)
+  * Fast-Growing Green Wall (₹3,999)
+  * Decorative Paradise (₹2,999)
+  * Air Purifier Pack (₹2,299)
+  * Sacred & Medicinal Garden (₹3,799)
+  * Mini Orchard Starter (₹4,699)
+  * Shade & Beauty Combo (₹3,599)
+  * Bulk Orchard Package - HOT (₹11,25,000) - 500 plants, 3-year care
+  * Flower Garden Paradise - HOT (₹5,000) - 50 flowering plants
+  * Palm Collection (₹2,899)
+  * Medicinal Herbs Collection (₹4,299)
+- Inquiry form for custom packages
+- LocalStorage tracking for certificate eligibility
+
+CARBON OFFSET PAGE (carbon.html)
+- Information about how plants help the planet
+- CO2 absorption data for 50+ plant species
+- Single plant calculator
+- Multi-plant calculator with add/remove rows
+- Certificate generation with verification
+- Print/Download PDF functionality
+- Disclaimer about absorption factors
+
+CONTACT PAGE (contact.html)
+- Quick contact buttons (Phone, WhatsApp, Email)
+- Contact form with validation
+- Nursery location and hours
+- Google Maps integration
+- Services offered
+
+TECHNICAL DETAILS
+-----------------
+
+CSS FILES:
+- style.css - Main styling with CSS variables
+- animations.css - Floating elements, hover effects, AOS animations
+
+JAVASCRIPT FILES:
+- main.js - Navigation, forms, general functionality
+- animations.js - Advanced animations and effects
+- packages.js - Package rendering and inquiry handling
+- carbon.js - Calculator, certificate generation, verification
+
+EXTERNAL LIBRARIES:
+- AOS (Animate On Scroll)
+- Font Awesome 6.4.0
+- Google Fonts (Poppins, Playfair Display)
+- html2canvas (for certificate download)
+
+COLOR SCHEME:
+- Primary Green: #2d5a3d
+- Secondary Green: #4a7c59
+- Light Green: #6fad7b
+- Accent Green: #a8d5ba
+- Forest Green: #1e3a2f
+- Warm Beige: #f4f1e8
+
+PLANT INVENTORY (50+ SPECIES)
+-----------------------------
+FRUIT TREES: Mango, Guava, Pomegranate, Orange, Plum, Peach, Pear, Lichi, StarFruit, Jackfruit, Chikoo, Lemon, Mosambi, Jamun, Anjeer, Phalsa
+
+PALM TREES: FoxtailPalm, FishtailPalm, ChinesePalm, ChampionPalm, PhoenixPalm
+
+ORNAMENTAL: Ficus, Cycus, MoneyPlant, AluBukhara, Moringa, Karanja, Karonda, Ashok, BottleBrush, SilverOak, Termelia, RubberPlant, Chandan, Hariman, Thuja, Conocarpus, PencilPine, Molsri, Cyprus, Imali, DurantaGreen, DurantaGold, ZPlant, Portulaca, Peepal, ButVrix, DragonFruit
+
+TIMBER: Sagwan, Poplar, Malabar, Mahaguni, Neem
+
+MEDICINAL: Arjun, Parijat, Kachnar, Amaltash, BelPatra, Aonla
+
+FLOWERING: Mogra, Ratrani, MadhuKamini, RaiBel, Rose, Chameli, Gudahal, DoubleChandani, MadhuMalati, Tikoma, Voganvilia, ChampaRed, ChampaWhite
+
+CONTACT INFORMATION
+-------------------
+Phone: +91 94138 40935
+Email: info@govindamnursery.com
+Address: Shri Govindam Nursery and Farms, Dhodhsar, Jaipur, Rajasthan, 303712
+WhatsApp: https://wa.me/919413840935
+
+CERTIFICATE SYSTEM
+------------------
+1. Customer submits inquiry on packages page (stores in localStorage)
+2. Customer calculates carbon offset on carbon page
+3. System verifies phone number against stored inquiries
+4. Generates certificate with customer name, plant details, CO2 offset
+5. Certificate shows "Verified" or "Pending" status
+6. Download as image or print to PDF
+7. Alternative: Email certificate within 30 days if download fails
+
+RESPONSIVE DESIGN
+-----------------
+- Mobile-first approach
+- Breakpoints: 768px, 480px
+- Hamburger menu for mobile
+- Flexible grids and layouts
+- Touch-friendly buttons and forms
+
+ANIMATIONS & EFFECTS
+-------------------
+- Floating leaves and butterflies
+- AOS scroll animations
+- Hover effects on cards and buttons
+- Smooth transitions
+- 3D card tilts
+- Parallax scrolling
+- Form field animations
+
+FORMS & VALIDATION
+------------------
+- Contact form with email validation
+- Package inquiry form
+- Carbon calculator forms
+- Floating labels
+- Success/error notifications
+- Form reset functionality
+
+LOCAL STORAGE USAGE
+-------------------
+Key: 'gn_records'
+Stores: Array of inquiry objects with phone, name, package, timestamp
+Purpose: Certificate verification system
+
+PRINT/PDF FUNCTIONALITY
+-----------------------
+- Browser print dialog for certificates
+- Print-only CSS for clean formatting
+- html2canvas for image download
+- Certificate includes: Customer name, plant details, CO2 offset, date, ID
+
+UPLOADING IMAGES
+----------------
+To add images to the website:
+1. Place images in the 'assets/' folder
+2. Update HTML to reference new images
+3. For plant images, update gallery cards
+4. For logo, replace 'assets/logo.svg'
+5. For hero background, update CSS in style.css
+
+MAINTENANCE TASKS
+-----------------
+1. Update plant inventory in js/carbon.js
+2. Modify package prices in js/packages.js
+3. Update contact information across all pages
+4. Add new plant images to assets/
+5. Update CO2 absorption values as needed
+6. Clear localStorage for testing: localStorage.removeItem('gn_records')
+
+CUSTOMER VERIFICATION MECHANISM
+-------------------------------
+Current: Phone number verification against localStorage
+Alternative: Upload customer list (CSV/JSON) with:
+- Customer name
+- Phone number
+- Email address
+- Purchase date
+- Plant details
+- Certificate status
+
+This would allow for:
+- Batch certificate generation
+- Email delivery system
+- Purchase tracking
+- Customer database management
+
+SAMPLE CERTIFICATE FORMAT
+-------------------------
+Govindam Nursery and Farms
+Carbon Offset Certificate
+
+This is to certify that [Customer Name]
+has planted/pledged [X] [Plant Name] plant(s)
+
+Estimated yearly carbon offset: ~ [X] kg CO₂ / year
+
+Certificate ID: GN-2025-XXXXXX
+Date: [Current Date]
+Status: Verified/Pending
+
+Authorized Signatory | Customer Signature

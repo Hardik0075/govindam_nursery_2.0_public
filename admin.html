@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Govindam Nursery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .admin-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+        .admin-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 0.5rem;
+        }
+        .upload-section {
+            border: 2px dashed var(--accent-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .upload-section:hover {
+            border-color: var(--primary-green);
+            background: var(--soft-cream);
+        }
+        .file-input {
+            display: none;
+        }
+        .upload-btn {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+        }
+        .upload-btn:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .customer-table th,
+        .customer-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .customer-table th {
+            background: var(--warm-beige);
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+        .customer-table tr:hover {
+            background: var(--soft-cream);
+        }
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0.2rem;
+            transition: var(--transition-smooth);
+        }
+        .btn-generate {
+            background: var(--primary-green);
+            color: white;
+        }
+        .btn-generate:hover {
+            background: var(--secondary-green);
+        }
+        .btn-email {
+            background: var(--accent-green);
+            color: var(--primary-green);
+        }
+        .btn-email:hover {
+            background: var(--light-green);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: 0 3px 10px var(--shadow-light);
+            border-left: 4px solid var(--primary-green);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .email-form {
+            background: var(--warm-beige);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+        .email-form input,
+        .email-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-small);
+            margin-bottom: 1rem;
+            font-family: inherit;
+        }
+        .email-form button {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .email-form button:hover {
+            background: var(--secondary-green);
+        }
+
+        /* Enhanced Form Styles */
+        .enhanced-form {
+            background: var(--warm-beige);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--accent-green);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .form-section h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-section h4 i {
+            color: var(--accent-green);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius-small);
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .plant-entry {
+            background: white;
+            padding: 1rem;
+            border-radius: var(--border-radius-small);
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .plant-entry-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .remove-plant-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-plant-btn:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+        }
+
+        .add-plant-btn {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            border: 2px dashed var(--accent-green);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .add-plant-btn:hover {
+            background: var(--light-green);
+            border-color: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .submit-btn {
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification {
+            padding: 1rem;
+            border-radius: var(--border-radius-small);
+            margin-bottom: 1rem;
+            display: none;
+        }
+        .notification.success {
+            background: var(--accent-green);
+            color: var(--primary-green);
+            border: 1px solid var(--light-green);
+        }
+        .notification.error {
+            background: #ffe6e6;
+            color: #d63031;
+            border: 1px solid #fab1a0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="assets/logo.svg" alt="Govindam Nursery Logo">
+            </div>
+            <div class="loading-title">Govindam Nursery</div>
+            <div class="loading-subtitle">Admin Dashboard</div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+            <p>Manage customers, generate certificates, and send email notifications</p>
+        </div>
+
+        <div class="notification" id="notification"></div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalCustomers">0</div>
+                <div class="stat-label">Total Customers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalPlants">0</div>
+                <div class="stat-label">Total Plants Sold</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalCarbonOffset">0</div>
+                <div class="stat-label">Total Carbon Offset (kg)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pendingCertificates">0</div>
+                <div class="stat-label">Pending Certificates</div>
+            </div>
+        </div>
+
+        <div class="admin-grid">
+            <!-- Customer Data Upload -->
+            <div class="admin-card">
+                <h3><i class="fas fa-upload"></i> Upload Customer Data</h3>
+                <div class="upload-section">
+                    <i class="fas fa-file-csv" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 1rem;"></i>
+                    <p>Upload CSV file with customer information</p>
+                    <input type="file" id="csvFile" class="file-input" accept=".csv">
+                    <button class="upload-btn" onclick="document.getElementById('csvFile').click()">
+                        <i class="fas fa-upload"></i> Choose CSV File
+                    </button>
+                    <p id="fileName" style="margin-top: 1rem; color: var(--text-light);"></p>
+                </div>
+                <button class="upload-btn" onclick="processCSV()" id="processBtn" style="display: none;">
+                    <i class="fas fa-cogs"></i> Process CSV Data
+                </button>
+            </div>
+
+            <!-- Manual Customer Entry -->
+            <div class="admin-card">
+                <h3><i class="fas fa-user-plus"></i> Add Customer Manually</h3>
+                <form id="customerForm" class="enhanced-form">
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Customer Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName">Customer Name *</label>
+                                <input type="text" id="customerName" placeholder="Enter full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">Phone Number *</label>
+                                <input type="tel" id="customerPhone" placeholder="+91 12345 67890" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email Address</label>
+                            <input type="email" id="customerEmail" placeholder="customer@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4><i class="fas fa-shopping-cart"></i> Purchase Details</h4>
+                        <div class="form-group">
+                            <label for="customerPurchase">Additional Notes</label>
+                            <textarea id="customerPurchase" rows="3" placeholder="Any special requirements or notes..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerDate">Purchase Date *</label>
+                                <input type="date" id="customerDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPlantCount">Total Plant Count *</label>
+                                <input type="number" id="customerPlantCount" min="1" placeholder="Total plants" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4><i class="fas fa-seedling"></i> Plant Selection</h4>
+                        <div id="plantEntries">
+                            <div class="plant-entry">
+                                <div class="plant-entry-row">
+                                    <div class="form-group">
+                                        <label>Plant Name</label>
+                                        <select class="plant-select" required>
+                                            <option value="">Select a plant</option>
+                                            <option value="Mango">Mango</option>
+                                            <option value="Guava">Guava</option>
+                                            <option value="Pomegranate">Pomegranate</option>
+                                            <option value="Orange">Orange</option>
+                                            <option value="Lichi">Lichi</option>
+                                            <option value="Neem">Neem</option>
+                                            <option value="Poplar">Poplar</option>
+                                            <option value="Eucalyptus">Eucalyptus</option>
+                                            <option value="Moringa">Moringa</option>
+                                            <option value="Arjun">Arjun</option>
+                                            <option value="Ficus">Ficus</option>
+                                            <option value="MoneyPlant">Money Plant</option>
+                                            <option value="Ashok">Ashok</option>
+                                            <option value="BottleBrush">Bottle Brush</option>
+                                            <option value="SilverOak">Silver Oak</option>
+                                            <option value="Tulsi">Tulsi</option>
+                                            <option value="Aonla">Aonla</option>
+                                            <option value="BelPatra">Bel Patra</option>
+                                            <option value="Chandan">Chandan</option>
+                                            <option value="Jamun">Jamun</option>
+                                            <option value="Lemon">Lemon</option>
+                                            <option value="Gulmohar">Gulmohar</option>
+                                            <option value="Termelia">Termelia</option>
+                                            <option value="Conocarpus">Conocarpus</option>
+                                            <option value="Mogra">Mogra</option>
+                                            <option value="Ratrani">Ratrani</option>
+                                            <option value="MadhuKamini">Madhu Kamini</option>
+                                            <option value="RaiBel">Rai Bel</option>
+                                            <option value="Rose">Rose</option>
+                                            <option value="Chameli">Chameli</option>
+                                            <option value="Gudahal">Gudahal</option>
+                                            <option value="DoubleChandani">Double Chandani</option>
+                                            <option value="MadhuMalati">Madhu Malati</option>
+                                            <option value="Tikoma">Tikoma</option>
+                                            <option value="Voganvilia">Voganvilia</option>
+                                            <option value="ChampaRed">Champa Red</option>
+                                            <option value="ChampaWhite">Champa White</option>
+                                            <option value="FoxtailPalm">Foxtail Palm</option>
+                                            <option value="FishtailPalm">Fishtail Palm</option>
+                                            <option value="ChinesePalm">Chinese Palm</option>
+                                            <option value="ChampionPalm">Champion Palm</option>
+                                            <option value="PhoenixPalm">Phoenix Palm</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity</label>
+                                        <input type="number" class="plant-quantity" min="1" value="1" required>
+                                    </div>
+                                    <button type="button" class="remove-plant-btn" onclick="removePlantEntry(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="add-plant-btn" onclick="addPlantEntry()">
+                            <i class="fas fa-plus"></i> Add Another Plant
+                        </button>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Customer Management -->
+        <div class="admin-card">
+            <h3><i class="fas fa-users"></i> Customer Management</h3>
+            <div style="margin-bottom: 1rem;">
+                <button class="action-btn btn-generate" onclick="generateAllCertificates()">
+                    <i class="fas fa-certificate"></i> Generate All Certificates
+                </button>
+                <button class="action-btn btn-email" onclick="sendAllEmails()">
+                    <i class="fas fa-envelope"></i> Send All Email Notifications
+                </button>
+                <button class="action-btn btn-generate" onclick="exportCustomerData()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+            </div>
+            <table class="customer-table" id="customerTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Purchase Details</th>
+                        <th>Plant Count</th>
+                        <th>Carbon Offset</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Email Configuration -->
+        <div class="admin-card">
+            <h3><i class="fas fa-envelope"></i> Email Configuration</h3>
+            <div class="email-form">
+                <input type="email" id="smtpEmail" placeholder="SMTP Email Address" value="info@govindamnursery.com">
+                <input type="password" id="smtpPassword" placeholder="SMTP Password">
+                <textarea id="emailTemplate" rows="5" placeholder="Email Template (use {{name}}, {{plantCount}}, {{carbonOffset}} as placeholders)">
+Dear {{name}},
+
+Thank you for your purchase from Govindam Nursery! 
+
+Your order details:
+- Plants: {{plantCount}} plants
+- Estimated Carbon Offset: {{carbonOffset}} kg CO₂/year
+
+Your Carbon Offset Certificate is attached to this email.
+
+Best regards,
+Govindam Nursery Team</textarea>
+                <button onclick="saveEmailConfig()">
+                    <i class="fas fa-save"></i> Save Email Configuration
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
